@@ -1,7 +1,3 @@
-<div class="jumbotron">
-    <p><%= form_tag("/test") do
-    [tag(:input, type: "text", name: "name"),
-    tag(:input, type: "submit", value: "New Game")]
-    end %>
-    </p>
+<div id="app">
+    <App/>
 </div>

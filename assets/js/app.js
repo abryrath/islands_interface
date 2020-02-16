@@ -15,38 +15,53 @@ import 'phoenix_html';
 //
 // Local files can be imported directly using relative paths, for example:
 import socket from './socket';
+import Vue from 'vue';
+import App from './components/App.vue';
 
 // class Client {
 
 // }
+// Vue.component('a-game', AGame);
 
-socket.connect();
+const $vm = new Vue({
+    created: function() {
+        console.log('created');
+    },
+    el: '#app',
+    components: {
+        App,
+        // Game
+    }
+    // render: h => h(<App/>),
+});
 
-window.newChannel = function(subtopic, screenName) {
-  return socket.channel(`game:${subtopic}`, {
-    screenName,
-  });
-};
+// socket.connect();
 
-window.join = function(channel) {
-  channel
-    .join()
-    .receive('ok', resp => {
-      console.log('Joined successfully!', resp);
-    })
-    .receive('error', resp => {
-      console.error('Unable to join', resp);
-    });
-};
+// window.newChannel = function(subtopic, screenName) {
+//   return socket.channel(`game:${subtopic}`, {
+//     screenName,
+//   });
+// };
 
-window.sayHello = function(channel, greeting) {
-    channel.push("hello", {message: greeting})
-    .receive("ok", resp => {
-        console.log("Hello", resp.message);
-    })
-    .receive("error", resp => {
-        console.log("Unable to say hello to the channel", resp.message);
-    });
-}
+// window.join = function(channel) {
+//   channel
+//     .join()
+//     .receive('ok', resp => {
+//       console.log('Joined successfully!', resp);
+//     })
+//     .receive('error', resp => {
+//       console.error('Unable to join', resp);
+//     });
+// };
 
-let gameChannel = window.newChannel('moon', 'moon');
+// window.sayHello = function(channel, greeting) {
+//     channel.push("hello", {message: greeting})
+//     .receive("ok", resp => {
+//         console.log("Hello", resp.message);
+//     })
+//     .receive("error", resp => {
+//         console.log("Unable to say hello to the channel", resp.message);
+//     });
+// }
+
+// let gameChannel = window.newChannel('moon', 'moon');
