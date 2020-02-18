@@ -3,6 +3,7 @@ defmodule IslandsInterfaceWeb.UserSocket do
 
   ## Channels
   # channel "room:*", IslandsInterfaceWeb.RoomChannel
+  channel "game:lobby", IslandsInterfaceWeb.GameChannel
   channel "game:*", IslandsInterfaceWeb.GameChannel
 
   # Socket params are passed from the client and can

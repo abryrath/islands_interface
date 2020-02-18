@@ -1,3 +1,4 @@
 <div id="app">
     <App/>
 </div>
+<input data-id type="text" value="<%= :rand.uniform(100) %>"/>

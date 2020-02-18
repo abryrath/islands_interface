@@ -24,9 +24,6 @@ import App from './components/App.vue';
 // Vue.component('a-game', AGame);
 
 const $vm = new Vue({
-    created: function() {
-        console.log('created');
-    },
     el: '#app',
     components: {
         App,
