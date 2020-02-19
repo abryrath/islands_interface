@@ -3,7 +3,7 @@
     <pre>{{ current() }}</pre>
     <NameInput v-on:name-set="handleNameSet"/>
     <Game />
-    <Client ref="client"/>
+    <Client ref="client" v-bind:name-set="nameSet"/>
   </div>
 </template>
 
@@ -42,6 +42,7 @@ export default class App extends Vue {
         // console.log(e);
         this.rules.setName();
         this.name = e;
+
         this.$refs.client.joinLobby(this.name, this.id);
         // this.socsket = joinGame(this.socket, this.id, this.name)
     }

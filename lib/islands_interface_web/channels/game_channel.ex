@@ -8,11 +8,12 @@ defmodule IslandsInterfaceWeb.GameChannel do
       IO.inspect(payload)
       send(self(), :after_join)
       
-      {:ok, assign(socket, :user_id, 10)}
+      {:ok, :ok, assign(socket, :user_id, 10)}
   end
+
   def join("game:" <> _player, _payload, socket) do
     send(self(), :after_join)
-    {:ok, assign(socket, :user_id, :rand.phash2(10))}
+    {:ok, :ok, assign(socket, :user_id, :rand.phash2(10))}
   end
 
   def handle_in("hello", payload, socket) do

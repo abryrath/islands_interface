@@ -3,6 +3,7 @@
     <ul>
       <li v-for="m in messages">{{ m }}</li>
     </ul>
+    <div>{{ $props.nameSet ? 'True' : 'False' }}</div>
   </div>
 </template>
 
@@ -11,7 +12,11 @@ import socket from "../socket";
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
-@Component
+@Component({
+    props: {
+        nameSet
+    }
+})
 export default class Client extends Vue {
   socket = undefined;
   channel = undefined;
@@ -26,18 +31,19 @@ export default class Client extends Vue {
     // return socket;
   }
   joinLobby(name) {
+      console.log('joinLobby');
     this.channel = this.socket
       .channel("game:lobby", {
         name
       });
     //   .join();
     // this.channel.j
-    this.channel.on("ok", a => console.log(a));
+    // this.channel.on("ok", a => console.log(a));
     // this.channel.push("hello");
 
     this.channel.join()
-        .receive("join", resp => this.handleResp)
-        .receive("ok", resp => this.handleResp);
+        .receive("join", resp => this.handleResp(resp))
+        .receive("ok", resp => this.handleResp(resp));
 
     this.channel.push('hello');
     // return s;
