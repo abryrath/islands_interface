@@ -10,8 +10,8 @@ defmodule IslandsInterface.Application do
     children = [
       # Start the endpoint when the application starts
       IslandsInterfaceWeb.Endpoint,
-    #   IslandsInterface.PubSub,
-      IslandsInterfaceWeb.Presence,
+      #   IslandsInterface.PubSub,
+      IslandsInterfaceWeb.Presence
       # Starts a worker by calling: IslandsInterface.Worker.start_link(arg)
       # {IslandsInterface.Worker, arg},
     ]

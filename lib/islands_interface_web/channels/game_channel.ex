@@ -4,11 +4,11 @@ defmodule IslandsInterfaceWeb.GameChannel do
 
   alias IslandsEngine.{Game, GameSupervisor}
 
-  def join("game:lobby", payload, socket) do
-      IO.inspect(payload)
+  def join("game:lobby", %{"name" => name}, socket) do
+    #   IO.inspect(payload)
       send(self(), :after_join)
       
-      {:ok, :ok, assign(socket, :user_id, 10)}
+      {:ok, :ok, assign(socket, :user_id, name)}
   end
 
   def join("game:" <> _player, _payload, socket) do

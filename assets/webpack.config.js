@@ -9,19 +9,36 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = (env, options) => ({
   optimization: {
     minimizer: [
-      new TerserPlugin({ cache: true, parallel: true, sourceMap: false }),
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false
+      }),
       new OptimizeCSSAssetsPlugin({})
     ]
   },
-  entry: {
-    './js/app.js': glob.sync('./vendor/**/*.js').concat(['./js/app.js'])
-  },
+  entry: './js/app.ts',
   output: {
     filename: 'app.js',
     path: path.resolve(__dirname, '../priv/static/js')
   },
   module: {
-    rules: [
+    rules: [{
+        test: /\.vue$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'vue-loader'
+        }
+      },
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        }
+
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -30,26 +47,25 @@ module.exports = (env, options) => ({
         }
       },
       {
-          test: /\.vue$/,
-          exclude: /node_modules/,
-          use: {
-              loader: 'vue-loader'
-          }
-      },
-      {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       }
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: '../css/app.css' }),
-    new CopyWebpackPlugin([{ from: 'static/', to: '../' }]),
+    new MiniCssExtractPlugin({
+      filename: '../css/app.css'
+    }),
+    new CopyWebpackPlugin([{
+      from: 'static/',
+      to: '../'
+    }]),
     new VueLoaderPlugin()
   ],
   resolve: {
-      alias: {
-        'vue$': 'vue/dist/vue.esm.js'
-      }
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    },
+    extensions: ['.ts', '.vue', '.js']
   }
 });

@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "module": "es2015",
+        "emitDecoratorMetadata": true,
+        "target": "ES2015",
+        "lib": ["ES2015", "DOM"],
+        "outDir": "./build/",
+        "typeRoots": [
+            "types"
+        ]
+    },
+    "exclude": ["node_modules"],
+    "include": ["js/**/*.ts"]
+}
